@@ -5,34 +5,34 @@ const {
     GraphQLSchema } = require('graphql');
 const axios = require('axios');
 
-const FilmType = new GraphQLObjectType({
-    name: "Film",
-    fields: () => ({
-        url: { type: GraphQLString }
-    })
-});
+// const FilmType = new GraphQLObjectType({
+//     name: "Film",
+//     fields: () => ({
+//         url: { type: GraphQLString }
+//     })
+// });
 
-const StarShipType = new GraphQLObjectType({
-    name: "StarShip",
-    fields: () => ({
-        url: { type: GraphQLString },
-        name: { type: GraphQLString },
-    })
-});
+// const StarShipType = new GraphQLObjectType({
+//     name: "StarShip",
+//     fields: () => ({
+//         url: { type: GraphQLString },
+//         name: { type: GraphQLString },
+//     })
+// });
 
-const SpecieType = new GraphQLObjectType({
-    name: "Specie",
-    fields: () => ({
-        url: { type: GraphQLString }
-    })
-});
+// const SpecieType = new GraphQLObjectType({
+//     name: "Specie",
+//     fields: () => ({
+//         url: { type: GraphQLString }
+//     })
+// });
 
-const VehicleType = new GraphQLObjectType({
-    name: "Vehicle",
-    fields: () => ({
-        url: { type: GraphQLString }
-    })
-});
+// const VehicleType = new GraphQLObjectType({
+//     name: "Vehicle",
+//     fields: () => ({
+//         url: { type: GraphQLString }
+//     })
+// });
 
 const PersonType = new GraphQLObjectType({
     name: 'Person', 
