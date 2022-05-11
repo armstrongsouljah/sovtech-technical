@@ -1,5 +1,5 @@
 import { useQuery, gql } from "@apollo/client";
-import {Link} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Person from "./Person";
 
 const GET_PEOPLE = gql`
@@ -16,7 +16,8 @@ const GET_PEOPLE = gql`
         }
 `
 
-function People({children}) {
+function PersonDetailView({children}) {
+    let params = useParams();
 
     const {data, loading, error} = useQuery(GET_PEOPLE, {
         pollInterval: 200,
@@ -34,21 +35,20 @@ function People({children}) {
         )
     }
     if(data) {
+        
+        const person = data.people.results.find(
+            item => item.name.toLowerCase().match(params.name.toLocaleLowerCase()));
         return (
-            <div className="row">
-                <div className="row">
-                    <input className="white-text" itemType="text" placeholder="Search Actors" />
-                    {
-                        data.people.results.map(person => 
-                            (<Link to={'/'+person.name.split(" ")[0].toLowerCase()}><Person className='col m6 s12' person={person}/></Link>))
-                    }
+            <div className="row container">
+                <div className="row ">
+                    <h1 className="center white-text">{person.name}</h1>
+                    <a className="btn" href="/">Back Home</a>
+                    <Person className='col s12' person={person}/>
                 </div>
-                
-                 
             </div>
         )
     }
   
 }
 
-export default People;
+export default PersonDetailView;
