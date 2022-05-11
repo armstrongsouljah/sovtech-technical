@@ -1,6 +1,9 @@
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const cors = require('cors');
+require('dotenv').config()
+
+const {PORT} = process.env || 4000
 
 const { schema } = require('./schema');
 
@@ -13,5 +16,5 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true,
 }));
 
-app.listen(4000);
-console.log('Running a GraphQL API server at http://localhost:4000/graphql');
+app.listen(PORT);
+console.log(`Running a GraphQL API server at http://localhost:${PORT}/graphql`);
