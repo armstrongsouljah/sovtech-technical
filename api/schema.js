@@ -5,35 +5,6 @@ const {
     GraphQLSchema } = require('graphql');
 const axios = require('axios');
 
-// const FilmType = new GraphQLObjectType({
-//     name: "Film",
-//     fields: () => ({
-//         url: { type: GraphQLString }
-//     })
-// });
-
-// const StarShipType = new GraphQLObjectType({
-//     name: "StarShip",
-//     fields: () => ({
-//         url: { type: GraphQLString },
-//         name: { type: GraphQLString },
-//     })
-// });
-
-// const SpecieType = new GraphQLObjectType({
-//     name: "Specie",
-//     fields: () => ({
-//         url: { type: GraphQLString }
-//     })
-// });
-
-// const VehicleType = new GraphQLObjectType({
-//     name: "Vehicle",
-//     fields: () => ({
-//         url: { type: GraphQLString }
-//     })
-// });
-
 const PersonType = new GraphQLObjectType({
     name: 'Person', 
     fields: () => ({
@@ -41,7 +12,7 @@ const PersonType = new GraphQLObjectType({
         height: { type: GraphQLInt },
         mass: { type: GraphQLInt },
         gender:  { type: GraphQLString },
-        homeworld: { type: GraphQLString }
+        homeworld: {type: GraphQLString}
         })        
 });
 
@@ -68,24 +39,29 @@ const RootQuery = new GraphQLObjectType({
         person: {
             type: PersonType,
             args: {
-              id: {type: GraphQLInt}
+              id: { type: GraphQLInt },
+              name: { type: GraphQLString }
             },
             resolve(parent, args) {
                 const {id} = args
-                return axios.get(`https://swapi.dev/api/people/${id}/`)
+                    return axios.get(`https://swapi.dev/api/people/${id}/`)
                             .then(res => res.data)
             }
         },
-
         searchPerson: {
-            type: PersonType,
+            type: PeopleResponseType,
             args: {
-                name: {type: GraphQLString}
+              name: { type: GraphQLString }
             },
             resolve(parent, args) {
-                return axios.get(`https://swapi.dev/api/people/?search=${name}`)
+                const {name} = args
+                    console.log('searching by name ', name)
+                    return axios.get('https://swapi.dev/api/people/?search='+name)
+                            .then(res => res.data)
+                // }  
             }
-        }
+        },
+
     }
 });
 
